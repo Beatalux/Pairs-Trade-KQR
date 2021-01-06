@@ -1,8 +1,11 @@
+#개선할 사항
+# 모듈화
+# stdin redirection
+# selenium -> beautifulsoup
+
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
-
-#group_url = "https://finance.naver.com/sise/sise_group.nhn?type=group"
 
 group_url="https://finance.naver.com/sise/sise_group.nhn?type=group"
 idx=4
@@ -19,13 +22,13 @@ driver.get(group_url)
 contents = driver.find_element_by_css_selector('#contentarea_left > table > tbody')
 #driver.findelement
 #print(contents.find_elements_by_tag_name('a'))
-"""
-group_url_list = []
-for e in contents.find_elements_by_tag_name('a'):
-    print(e.get_attribute('href'), e.text)
-"""
+
 group_url_list = [e.get_attribute('href') for e in contents.find_elements_by_tag_name('a')]
 print(group_url_list)
+
+file = open('group_url_list.txt','w')
+file.write('\n'.join(group_url_list))
+file.close()
 """
 try:
     while idx<=79:
