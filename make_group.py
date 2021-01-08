@@ -16,6 +16,7 @@ for i,url in enumerate(group_urls):
     soup = BeautifulSoup(html.text,'html.parser')
 
     # *붙은 종목 처리, l.text.strip('*') 안돼서 형변환함
+    # 공백제거
     group_stocks_list[i] = [str(l.text).strip('*').strip(' ') for l in soup.find_all('div',attrs={"class":"name_area"})]
 
 print(group_stocks_list)
